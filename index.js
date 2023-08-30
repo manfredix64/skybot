@@ -3,15 +3,13 @@ const { Client, Intents, Collection } = require("discord.js");
 const { token, prefix } = require('./config.json');
 
 const client = new Client({
-    intents: ['Guilds', 'GuildMessages', 'GuildMembers']
+    intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'MessageContent']
 })
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 }
 
